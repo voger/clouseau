@@ -1,8 +1,8 @@
-    # Important note:
-    This project is a toy project of mine so I can learn various Elixir aspects better.
-    While best efforts are made to keep it as safe as possible, I can't make any guaranties
-    for it's functionality. Not even for the intended purpose. Keep in mind this is the work
-    of a programming student and proceed with caution. **Comments, advice and pull requests are welcome.**
+# Important note:
+  This project is a toy project of mine so I can learn various Elixir aspects better.
+  While best efforts are made to keep it as safe as possible, I can't make any guaranties
+  for it's functionality. Not even for the intended purpose. Keep in mind this is the work
+  of a programming student and proceed with caution. **Comments, advice and pull requests are welcome.**
 
 Clouseau is a silly little inspector. Essentialy is an enhancement over the IO.inspect function.
 It adds the functionality to display the file, module and line number of the calling location.
