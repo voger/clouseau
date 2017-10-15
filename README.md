@@ -51,7 +51,7 @@ In the above `:label` option the display options are separated from the label wi
  * **f** for `:file`
 
 How these items will be shown is not configurable on the fly. If, for example, it is prefered to display
-the module before the line, this can be changed only for the template.
+the module before the line, this can be changed only by using a different template.
 
 
 # TODO

@@ -1,5 +1,6 @@
 defmodule Cl do
   alias Clouseau.Render
+  require IEx
 
   @options_map %{
     "f" => :file,
@@ -17,22 +18,24 @@ defmodule Cl do
 
 
   defmacro inspector(item, opts \\ []) do
+    caller_context = %{
+    :file => __CALLER__.file,
 
-      caller_context = %{
-      :file => __CALLER__.file,
-      :module => to_string(__CALLER__.module),
-      :line => to_string(__CALLER__.line)}
+    # FIXME: __CALLER__.module to string prepends Elixir. to the name.
+    # Is there any better way?
+    :module => __CALLER__.module |> to_string() |> String.replace(~r/^Elixir\./, ""),
+    :line => to_string(__CALLER__.line)}
 
-      label =
-        opts
-        |> Keyword.get(:label)
-        |> render_label(caller_context)
+    label =
+      opts
+      |> Keyword.get(:label)
+      |> render_label(caller_context)
 
-      opts = Keyword.update(opts, :label, nil, fn _ -> label end)
+    opts = Keyword.update(opts, :label, nil, fn _ -> label end)
 
-      quote do
-        IO.inspect unquote(item), unquote(opts)
-      end
+    quote do
+      IO.inspect unquote(item), unquote(opts)
+    end
   end
 
 
