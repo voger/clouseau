@@ -1,4 +1,4 @@
-# Important note:
+    # Important note:
     This project is a toy project of mine so I can learn various Elixir aspects better.
     While best efforts are made to keep it as safe as possible, I can't make any guaranties
     for it's functionality. Not even for the intended purpose. Keep in mind this is the work
