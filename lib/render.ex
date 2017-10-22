@@ -12,7 +12,10 @@ defmodule Clouseau.Render do
                     """
 
 
-  EEx.function_from_string(:def, :label, Application.get_env(:clouseau, :template, @default_template),
-    [:assigns], engine: Clouseau.TemplateEngine, trim: true)
+
+  def label(assigns) do
+    template = Application.get_env(:clouseau, :template, @default_template)
+    EEx.eval_string(template, [assigns: assigns], engine: Clouseau.TemplateEngine, trim: true)
+  end
 
 end

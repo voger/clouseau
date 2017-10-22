@@ -29,6 +29,10 @@ defmodule Clouseau.Switches do
 
   def switches, do: @switches
   def aliases, do: @aliases
-  def default_switches, do: @default_switches
+
+  def default_switches do
+      Keyword.merge(@no_switches, Application.get_env(:clouseau, :default_switches, @default_switches))
+ end
+
   def no_switches, do: @no_switches
 end

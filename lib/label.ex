@@ -19,7 +19,12 @@ defmodule Clouseau.Label do
   end
 
   defp apply_switches(switches) when is_list(switches) do
+      IO.inspect  Switches.default_switches(), label: "default switches"
+    IO.inspect  switches, label: "given switches"
+
+
     Keyword.merge(Switches.default_switches(), switches)
+    |> IO.inspect(label: "Result")
   end
 
   @doc """

@@ -31,7 +31,7 @@ Clouseau exports two macros: `Cl.inspect/2` and `Cl.inspect/3`. Just use them in
 
 
 ```elixir
-    Cl.inspect("test2", label: "This is a test")
+    Cl.inspect("test", label: "This is a test")
 ```
 
 ## Switches
@@ -74,7 +74,7 @@ If you wish to have your default set of switches you can set options in your con
 
 ```elixir
    config :clouseau,
-      default_switches: [module: true, line: true, file: true, border: true}]
+      default_switches: [module: true, line: true, file: true, border: true]
 ```
 
 
