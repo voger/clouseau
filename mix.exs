@@ -19,7 +19,7 @@ defmodule CL.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:credo, "~> 0.8", only: [:dev, :test], runtime: false, optional: true}
+      {:credo, "~> 0.8", runtime: false, optional: true}
     ]
   end
 end
