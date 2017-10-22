@@ -1,4 +1,7 @@
-if Code.ensure_compiled?(Credo.Check) do
+if Code.ensure_loaded?(Credo.Check) and
+   Code.ensure_loaded?(Credo.Code) and
+   Code.ensure_loaded?(IssueMeta)
+  do
   defmodule Clouseau.Check.Warning.ClInspect do
     @moduledoc """
       Cl.inspect is a IO.inspect enhancement meant for debugging and testing
