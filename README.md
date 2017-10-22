@@ -98,11 +98,13 @@ You can use a custom template by setting in your config. Below it is shown the d
               """
 ```
 
+## Credo
+
+clouseau provides two custom credo checks
 
 
 # TODO
 * Add some tests
-* Add credo support
 * Add dialyzer documentation
 
 
