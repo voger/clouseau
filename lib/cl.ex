@@ -1,3 +1,4 @@
+# credo:disable-for-file Clouseau.Check.Warning.ClInspect
 defmodule Cl do
   @moduledoc """
   This is the main module to use. You need to first require it in your file
@@ -31,6 +32,7 @@ defmodule Cl do
   Use it like the `IO.inspect/2` function
   """
   defmacro inspect(item, opts \\ []) do
+    # credo:disable-for-next-line Clouseau.Check.Warning.ClInspect
     quote do: Cl.inspect(unquote(:stdio), unquote(item), unquote(opts))
   end
 end
