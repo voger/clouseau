@@ -8,7 +8,7 @@ on the screen.
 
 Add `clouseau` to your list of dependencies in `mix.exs`
 
-```elixr
+```elixir
 def deps do
   [
     #...
