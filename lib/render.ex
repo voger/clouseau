@@ -2,13 +2,17 @@ defmodule Clouseau.Render do
   require EEx
 
   @default_template  """
-                       <%=  %>
-                       <%= if @file, do: IO.ANSI.blue() <> @file <> "\n" %>   %>
-                       <%= if @module, do: IO.ANSI.green() <> @module %><%= if (@module && @line), do: ":" %>
-                       <%= if @line, do: IO.ANSI.yellow() <> @line %>
-                       <%= IO.ANSI.reset() <> "\n" %>
+                       <% import IO.ANSI %>
+                       <%= if has_val?(file), do: blue() <> @file <> "\n" %>
+                       <%= green() <> @module %><%=  if has_val?(module), do: ":" %>
+                       <%= red() <> @line %>
+                       <%= if has_val?(module) || has_val?(line), do: "\n" %>
+                       <%= yellow()  <> @text <> reset() %><%= if has_val?(text), do: ": " %>
+                       <%= reset()  %>
                     """
 
-  EEx.function_from_string(:def, :location, Application.get_env(:clouseau, :template, @default_template),
+
+  EEx.function_from_string(:def, :label, Application.get_env(:clouseau, :template, @default_template),
     [:assigns], engine: Clouseau.TemplateEngine, trim: true)
+
 end
