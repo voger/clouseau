@@ -83,7 +83,7 @@ The template uses a custom engine instead of the default `EEx.SmartEngine`. The 
 The format of the label is not configurable on the fly. If, for example, it is prefered to display
 the module before the line, this can be changed only by using a diferent template at compile time.
 
-You can use a custom template by setting in your config
+You can use a custom template by setting in your config. Below it is shown the default template as an example.
 
 ```elixir
   config :clouseau,
