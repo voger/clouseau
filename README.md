@@ -100,12 +100,25 @@ You can use a custom template by setting in your config. Below it is shown the d
 
 ## Credo
 
-clouseau provides two custom credo checks
+clouseau provides two custom credo checks: `Clouseau.Check.Warning.ClInspect` and `Clouseau.Check.Warning.RequireCl`.
+To use them just append them to the `:checks` option in your `.credo.exs` file.
 
+```elixir
+      checks: [
+
+        # ... some checks
+
+        # Custom checks can be created using `mix credo.gen.check`.
+        #
+
+        {Clouseau.Check.Warning.ClInspect},
+        {Clouseau.Check.Warning.RequireCl},
+      ]
+```
 
 # TODO
 * Add some tests
 * Add dialyzer documentation
-
+* Maybe add to HEX
 
 
