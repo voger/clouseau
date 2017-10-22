@@ -1,4 +1,4 @@
-if Code.ensure_loaded?(Credo.Check) do
+if Code.ensure_compiled?(Credo.Check) do
   defmodule Clouseau.Check.Warning.RequireCl do
     @moduledoc """
       Requiring Cl.inspect usualy happens during debugging or
