@@ -2,6 +2,7 @@ if Code.ensure_loaded?(Credo.Check) and
    Code.ensure_loaded?(Credo.Code) and
    Code.ensure_loaded?(IssueMeta)
   do
+  defmodule Clouseau.Check.Warning.RequireCl do
     @moduledoc """
       Requiring Cl.inspect usualy happens during debugging or
       testing in order to use the Cl.inspect macro. Since it's
