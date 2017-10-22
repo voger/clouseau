@@ -6,7 +6,17 @@ on the screen.
 
 # How to install
 
-// TODO: add installation notes.
+Add `clouseau` to your list of dependencies in `mix.exs`
+
+```elixr
+def deps do
+  [
+    #...
+    {:clouseau, github: "voger/clouseau"}
+  ]
+end
+```
+
 
 
 # How to use
