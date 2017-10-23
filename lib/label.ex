@@ -13,14 +13,11 @@ defmodule Clouseau.Label do
     {given_switches, string_list, _} =
       label
       |> OptionParser.split()
-      |> OptionParser.parse(strict: Switches.switches(), aliases: Switches.aliases())
+      |> OptionParser.parse(strict: Switches.valid_switches(), aliases: Switches.aliases())
     text = Enum.join string_list, " "
-    {apply_switches(given_switches), text}
+    {Switches.apply(given_switches), text}
   end
 
-  defp apply_switches(switches) when is_list(switches) do
-    Keyword.merge(Switches.default_switches(), switches)
-  end
 
   @doc """
   Takes a string containing text and the appropriate switches and
