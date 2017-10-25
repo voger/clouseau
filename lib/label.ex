@@ -27,8 +27,6 @@ defmodule Clouseau.Label do
     {Switches.apply(given_switches), text}
   end
 
-  def regex, do: @regex
-
   # Converts a string to arguments list to prepare it for
   # `OptionParser.parse/2`. It returns a list containing
   # switches, aliases, groups of aliases and the remaining string.
