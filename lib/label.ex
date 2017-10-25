@@ -65,13 +65,10 @@ defmodule Clouseau.Label do
 
   # Takes a string containing text and the appropriate switches and
   # renders is according to the given switches by using a template.
-
-  # string is a string with the format "-<switches> <The actual text>"
+  #
+  # string is the label coming from the user
   # caller is a `__ENV__` struct
-
-  # If you want to add switches to your text, e.g.: "Using with the -d switch",
-  # then escape it with \. "Using with the \-d switch"
-
+  #
   # Returns a tuple {switches, label} where:
   #   switches is a keyword list with the switches used to render the template
   #   label is the rendered template
