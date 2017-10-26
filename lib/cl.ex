@@ -17,12 +17,12 @@ defmodule Cl do
     {label, opts_without_label} = Keyword.pop(opts, :label)
     {switches, rendered_label} = Clouseau.Label.render(label, __ENV__)
 
-    IO.write rendered_label
+    IO.write(device, rendered_label)
     # credo:disable-for-next-line Credo.Check.Warning.IoInspect
     IO.inspect(device, item, opts_without_label)
     if Keyword.fetch!(switches, :border) do
       border = Clouseau.Border.border()
-      IO.puts(border)
+      IO.puts(device, border)
     end
     item
     end
