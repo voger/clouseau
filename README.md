@@ -54,7 +54,7 @@ Cl.inspect({"test", 7}, label: "-b Test With border", syntax_colors: [number: :b
 # lib/cltest.ex
 # Clouseau.ClTest:26
 # Test With border: {"test", 7}
-# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------
 # {"test", 7}
 ```
 
@@ -66,10 +66,10 @@ and the rest of the line is treated as the text of the label. For example:
 Cl.inspect({"test", 7, [banana: "split"]}, label: "--no-module --no-line -b Showing only the --file option. The --no-border option has no effect")
 # lib/cltest.ex
 # Showing only the --file option. The --no-border option has no effect: {"test", 7, [banana: "split"]}
-# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------------------------------------------------
 ```
 
-
+---
  **Note:** The first space on the label text is always discarded. The rest of the spaces stay there. This is intentional to keep it as consistent as possible
  with `IO.inspect` who does not trim white spaces. For example:
 
@@ -78,12 +78,14 @@ Cl.inspect({"test", 7, [banana: "split"]}, label: "--no-module --no-line -b Show
  #lib/cltest.ex
  #Clouseau.ClTest:26
  #     Test With border: {"test", 7}
- #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ #------------------------------------------------------------------------------------------
  ```
 
  The distance between the switch and the text is 6 spaces while the result displays 5 spaces. If, for some reason, you depend on `IO.inspect` not triming the
  white space, keep this behavior in mind.
 
+
+---
 
 ### The available switches are:
 
