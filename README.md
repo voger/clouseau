@@ -40,8 +40,7 @@ Both macros are ready to use out of the box. By default they display the file, m
 macro was called, above the label and the inspected term.
 
 clouseau uses [OptionParser](https://hexdocs.pm/elixir/OptionParser.html) to parse the switches. The switches can
-be given directly in the label option. You can use switches to modify what will be shown
-
+be given directly in the label option. You can use switches to modify what will be shown.
 
 
 ```elixir
@@ -59,7 +58,34 @@ Cl.inspect({"test", 7}, label: "-b Test With border", syntax_colors: [number: :b
 # {"test", 7}
 ```
 
-The available switches are:
+
+Switches that are intended to be used must be grouped in the beginning of the string. Any non-switch group of characters stops the parser
+and the rest of the line is treated as the text of the label. For example:
+
+```elixir
+Cl.inspect({"test", 7, [banana: "split"]}, label: "--no-module --no-line -b Showing only the --file option. The --no-border option has no effect")
+# lib/cltest.ex
+# Showing only the --file option. The --no-border option has no effect: {"test", 7, [banana: "split"]}
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+```
+
+
+ **Note:** The first space on the label text is always discarded. The rest of the spaces stay there. This is intentional to keep it as consistent as possible
+ with `IO.inspect` who does not trim white spaces. For example:
+
+ ```elixir
+ Cl.inspect({"test", 7}, label: "-b      Test With border", syntax_colors: [number: :blue])
+ #lib/cltest.ex
+ #Clouseau.ClTest:26
+ #     Test With border: {"test", 7}
+ #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ ```
+
+ The distance between the switch and the text is 6 spaces while the result displays 5 spaces. If, for some reason, you depend on `IO.inspect` not triming the
+ white space, keep this behavior in mind.
+
+
+### The available switches are:
 
 switch    |type     |default|shortcut |description
 ----------|---------|-------|---------|-----------
@@ -86,7 +112,7 @@ The template uses a custom engine instead of the default `EEx.SmartEngine`. The 
 
 * It doesn't add a line break on tag's end. Instead you shoud add a `"\n" `where you want a line break. The reason
   for this change is beacuse this way the line break can be controlled with conditionals.
-* It supports a `has_val?/1` function that returns `true` if the value is not one of `nil`, `false` or `""`.
+* IPt supports a `has_val?/1` function that returns `true` if the value is not one of `nil`, `false` or `""`.
 * The `@` function desn't use `Access.fetch/2` but `Map.get/2` to get the value. It does not warn or rise any errors. Instead it returns an empty string.
 
 
