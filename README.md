@@ -84,6 +84,7 @@ Cl.inspect({"test", 7, [banana: "split"]}, label: "--no-module --no-line -b Show
  The distance between the switch and the text is 6 spaces while the result displays 5 spaces. If, for some reason, you depend on `IO.inspect` not triming the
  white space, keep this behavior in mind.
 
+
 ### The available switches are:
 
 switch    |type     |default|shortcut |description
