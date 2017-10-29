@@ -114,7 +114,7 @@ The template uses a custom engine instead of the default `EEx.SmartEngine`. The 
 
 * It doesn't add a line break on tag's end. Instead you shoud add a `"\n" `where you want a line break. The reason
   for this change is beacuse this way the line break can be controlled with conditionals.
-* IPt supports a `has_val?/1` function that returns `true` if the value is not one of `nil`, `false` or `""`.
+* It supports a `has_val?/1` function that returns `true` if the value is not one of `nil`, `false` or `""`.
 * The `@` function desn't use `Access.fetch/2` but `Map.get/2` to get the value. It does not warn or rise any errors. Instead it returns an empty string.
 
 

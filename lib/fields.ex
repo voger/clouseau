@@ -44,7 +44,7 @@ defmodule Clouseau.Fields do
     file = caller.file
     case File.cwd() do
       {:ok, dir} ->
-        Path.relative_to(caller.file, dir)
+        Path.relative_to(file, dir)
       {:error, _} ->
         file
     end
