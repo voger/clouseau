@@ -91,7 +91,7 @@ Cl.inspect({"test", 7, [banana: "split"]}, label: "--no-module --no-line -b Show
 ### The available switches are:
 
 switch    | type     | default | shortcut | description
-----------|----------|---------|----------|
+----------|----------|---------|----------|----------------------
 file:     | :boolean | true    | f        | Display the file where this call happened
 full_path | :boolean | false   | none     | Display the file as absolute path or relative to project root. Default is relative to project root
 module:   | :boolean | true    | m        | Display the module where this call happened
