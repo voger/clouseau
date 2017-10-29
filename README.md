@@ -19,7 +19,8 @@ end
 
 
 
-# How to use
+#
+How to use
 
 In order to use Clauseau you first must require the `Cl` module
 
@@ -89,14 +90,14 @@ Cl.inspect({"test", 7, [banana: "split"]}, label: "--no-module --no-line -b Show
 
 ### The available switches are:
 
-switch    |type     |default|shortcut |description
-----------|---------|-------|---------|-----------
-file:     |:boolean |true   |f        |Display the file where this call happened
-full_path |:boolean |false  |none     |Display the file as absolute path or relative to project root. Default is relative to project root
-module:   |:boolean |true   |m        |Display the module where this call happened
-line:     |:boolean |true   |l        |Display the line where this call happened
-text:     |:boolean |true   |t        |Display the descriptive text for the label
-border:   |:boolean |false  |b        |Display a border under the inspected term
+switch    | type     | default | shortcut | description
+----------|----------|---------|----------|
+file:     | :boolean | true    | f        | Display the file where this call happened
+full_path | :boolean | false   | none     | Display the file as absolute path or relative to project root. Default is relative to project root
+module:   | :boolean | true    | m        | Display the module where this call happened
+line:     | :boolean | true    | l        | Display the line where this call happened
+text:     | :boolean | true    | t        | Display the descriptive text for the label
+border:   | :boolean | false   | b        | Display a border under the inspected term
 
 If you wish to have your default set of switches you can set options in your config
 
