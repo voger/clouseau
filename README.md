@@ -19,8 +19,7 @@ end
 
 
 
-#
-How to use
+# How to use
 
 In order to use Clauseau you first must require the `Cl` module
 
