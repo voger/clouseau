@@ -5,14 +5,17 @@ defmodule CL.Mixfile do
     "GitHub" => "https://github.com/voger/clouseau"
   }
 
+  @version "0.3.1"
+
   def project do
     [
       app: :clouseau,
-      version: "0.3.0",
+      version: @version,
       elixir: "~> 1.5",
       start_permanent: Mix.env == :prod,
       deps: deps(),
       package: package(),
+      docs: docs(),
       description: description(),
       name: "Clouseau",
       source_url: Map.get(@links, "GitHub")
@@ -27,7 +30,9 @@ defmodule CL.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:credo, "~> 0.8", runtime: false, optional: true}
+      {:credo, "~> 0.8", runtime: false, optional: true},
+      {:ex_doc, "~> 0.18", only: :dev},
+      {:earmark, "~> 1.2.4", only: :dev},
     ]
   end
 
@@ -37,10 +42,16 @@ defmodule CL.Mixfile do
 
   defp package() do
     [
-      files: ["lib/*.ex", "mix.exs", "README.md", "LICENSE*"],
+      files: ["lib/**/*.ex", "mix.exs", "README.md", "LICENSE*"],
       maintainers: ["voger"],
       licenses: ["MIT"],
       links: @links
+    ]
+  end
+
+  defp docs() do
+    [
+      extras: ["README.md"],
     ]
   end
 end

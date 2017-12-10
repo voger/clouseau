@@ -12,7 +12,7 @@ Add `clouseau` to your list of dependencies in `mix.exs`
 def deps do
   [
     #...
-    {:clouseau, github: "voger/clouseau"}
+    {:clouseau, "~> 0.3.1"}
   ]
 end
 ```
@@ -89,8 +89,9 @@ Cl.inspect({"test", 7, [banana: "split"]}, label: "--no-module --no-line -b Show
 
 ### The available switches are:
 
-switch    | type     | default | shortcut | description
-----------|----------|---------|----------|----------------------
+
+Switch    | Type     | Default | Shortcut | Description
+--------- | -------- | ------- | -------- | -------------------------------------------------------------------------------
 file:     | :boolean | true    | f        | Display the file where this call happened
 full_path | :boolean | false   | none     | Display the file as absolute path or relative to project root. Default is relative to project root
 module:   | :boolean | true    | m        | Display the module where this call happened
@@ -110,18 +111,18 @@ If you wish to have your default set of switches you can set options in your con
 ## Template
 
 clouseau uses an [EEx](https://hexdocs.pm/eex/EEx.html) template to display the various parts of the label.
-The template uses a custom engine instead of the default `EEx.SmartEngine`. The differences are:
+The template uses a custom engine `Clouseau.TemplateEngine` instead of the default `EEx.SmartEngine`. The differences are:
 
 * It doesn't add a line break on tag's end. Instead you shoud add a `"\n" `where you want a line break. The reason
   for this change is beacuse this way the line break can be controlled with conditionals.
-* It supports a `has_val?/1` function that returns `true` if the value is not one of `nil`, `false` or `""`.
+* It supports a `has_val?/1` function that returns `false` if the value is one of `nil`, `false` or `""`.
 * The `@` function desn't use `Access.fetch/2` but `Map.get/2` to get the value. It does not warn or rise any errors. Instead it returns an empty string.
 
 
 The format of the label is not configurable on the fly. If, for example, it is prefered to display
 the module before the line, this can be changed only by using a diferent template at compile time.
 
-You can use a custom template by setting in your config. Below it is shown the default template as an example.
+You can use a custom template by setting in your config. Below is shown the default template as an example.
 
 ```elixir
   config :clouseau,
@@ -157,6 +158,5 @@ To use them just append them to the `:checks` option in your `.credo.exs` file.
 # TODO
 * Add some tests
 * Add dialyzer documentation
-* Maybe add to HEX
 
 
