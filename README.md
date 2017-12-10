@@ -34,6 +34,12 @@ Clouseau exports two macros: `Cl.inspect/2` and `Cl.inspect/3`. Just use them in
     Cl.inspect("test", label: "This is a test")
 ```
 
+That's it. You can return to your code now.
+
+
+
+If you wish to do some customization continue reading below.
+
 ## Switches
 
 Both macros are ready to use out of the box. By default they display the file, module and line where the
@@ -59,8 +65,7 @@ Cl.inspect({"test", 7}, label: "-b Test With border", syntax_colors: [number: :b
 ```
 
 
-Switches that are intended to be used must be grouped in the beginning of the string. Any non-switch group of characters stops the parser
-and the rest of the line is treated as the text of the label. For example:
+Switches that are intended to be used must be grouped in the beginning of the string. Any non-switch group of characters stops the parser and the rest of the line is treated as the text of the label. For example:
 
 ```elixir
 Cl.inspect({"test", 7, [banana: "split"]}, label: "--no-module --no-line -b Showing only the --file option. The --no-border option has no effect")
