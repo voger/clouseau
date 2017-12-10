@@ -11,8 +11,7 @@ defmodule Clouseau.Label do
           ^                     # Position at the begginning of the string
           -{1,2}                # It starts with one or two dashes
           \w+                   # followed by at least one alphanumeric
-          (?:\w|(?<!-)-)*       # Followed by one or more alphanumerics or dashes.
-                                # Rejects two dashes together
+          (?:\w|(?<!-)-)*       # Followed by one or more alphanumerics or dashes. Rejects two dashes together
           /x
 
 
