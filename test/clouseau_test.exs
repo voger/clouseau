@@ -12,7 +12,7 @@ defmodule ClauseauTest do
 
   test "displays correct info" do
 
-    assert __ENV__.line =~ Cl.inspector(@shopping_list, label: "The shopping list")
+    assert __ENV__.line =~ Cl.inspect(@shopping_list, label: "The shopping list")
   end
 
 end
