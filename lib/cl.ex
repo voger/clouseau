@@ -13,14 +13,11 @@ defmodule Cl do
   """
   defmacro inspect(device, item, opts) when is_list(opts) do
     quote bind_quoted: [device: device, item: item, opts: opts], unquote: true do
-      {label, opts_without_label} = Keyword.pop(opts, :label)
-      {switches, rendered_label} = Clouseau.Label.render(label, __ENV__)
+      {label, opts_without_label} = Keyword.pop(opts, :label, "")
+      {switches, text} = Clouseau.Switches.parse(label)
+      rendered_label = Clouseau.Label.render(text, switches, __ENV__)
 
-      {_, opts_with_color} =
-        Keyword.get_and_update(opts_without_label, :syntax_colors, fn current_value ->
-          {current_value, Clouseau.Colors.syntax_colors(current_value)}
-        end)
-
+      opts_with_color = Clouseau.Colors.apply(opts_without_label, switches)
 
       IO.write(device, rendered_label)
       # credo:disable-for-next-line Credo.Check.Warning.IoInspect
