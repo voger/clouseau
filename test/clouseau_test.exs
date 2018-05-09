@@ -6,7 +6,7 @@ defmodule ClouseauTest do
 
   @shopping_list %{
     :eggs => 6,
-    "milk" => "1 liter",
+    "milk" => %{quantity: 1, unit: "liter"},
     7 => 2,
     "bread" => [pita: 3, brioche: "half"]
   }
@@ -35,7 +35,7 @@ defmodule ClouseauTest do
     {second_line, result} = List.pop_at(result, 0)
 
     assert second_line ==
-             IO.ANSI.format_fragment([:green, module, ":", :red, to_string(line)], true)
+             IO.ANSI.format_fragment([:green, module, ":", :red, to_string(line), :reset], true)
              |> IO.iodata_to_binary()
 
     # Displays correct text with colors and then resets to show ":"
