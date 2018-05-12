@@ -1,15 +1,7 @@
 defmodule ClouseauTest do
-  use ExUnit.Case
+  use ClouseauCase
   import ExUnit.CaptureIO
 
-  require Cl
-
-  @shopping_list %{
-    :eggs => 6,
-    "milk" => %{quantity: 1, unit: "liter"},
-    7 => 2,
-    "bread" => [pita: 3, brioche: "half"]
-  }
 
   test "displays correct info" do
     label = "The shopping list"
@@ -29,7 +21,9 @@ defmodule ClouseauTest do
     {first_line, result} = List.pop_at(result, 0)
     {:ok, dir} = File.cwd()
     filename = Path.relative_to(file, dir)
-    assert first_line == IO.ANSI.format_fragment([:blue, filename], true) |> IO.iodata_to_binary()
+
+    assert first_line ==
+             IO.ANSI.format_fragment([:blue, filename, :reset], true) |> IO.iodata_to_binary()
 
     # Displays correct module and correct line with correct colors
     {second_line, result} = List.pop_at(result, 0)
@@ -39,9 +33,9 @@ defmodule ClouseauTest do
              |> IO.iodata_to_binary()
 
     # Displays correct text with colors and then resets to show ":"
-    {third_lne, result} = List.pop_at(result, 0)
+    {third_line, result} = List.pop_at(result, 0)
 
-    assert String.starts_with?(third_lne, "\e[33mThe shopping list\e[0m: ")
+    assert String.starts_with?(third_line, "\e[33mThe shopping list\e[0m: ")
 
     # Displays the term exactly as IO.inspect
     assert (["%{"] ++ result ++ [""]) |> Enum.join("\n") ==
