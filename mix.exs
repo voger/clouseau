@@ -30,7 +30,7 @@ defmodule CL.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:credo, "~> 0.8", runtime: false, optional: true},
+      {:credo, "~> 0.9", runtime: false, optional: true},
       {:ex_doc, "~> 0.18", only: :dev},
       {:earmark, "~> 1.2.4", only: :dev},
     ]
