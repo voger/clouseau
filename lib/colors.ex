@@ -17,8 +17,8 @@ defmodule Clouseau.Colors do
   # If the :colors option is set to true use the default colors, merging 
   # any color preferences that may exist in this speciffic call.
   # If the :colors option is set to false don't use the default colors.
-  # Any :syntax_colors the user has entered in this call will be used 
-  # as they are.
+  # Any :syntax_colors the user has entered in this call will be prefered 
+  # over the defaults.
   def apply(options, switches) do
     if Keyword.get(switches, :colors) do
       {_, options_with_colors} =
