@@ -109,7 +109,7 @@ If you wish to have your default set of switches you can set options in your con
 
 ```elixir
 config :clouseau,
-default_switches: [module: true, line: true, file: true, border: true]
+default_switches: [module: true, line: true, file: true, border: true]
 ```
 
 
@@ -133,14 +133,14 @@ You can use a custom template by setting in your config. Below is shown the defa
 
 ```elixir
 config :clouseau,
-        template: """
-                    <% import IO.ANSI %>
-                    <%= if has_val?(file), do: from_iolist [:blue,  @file, :reset, "\n"] %>
-                    <%= if has_val?(module), do: from_iolist [:green, @module, ":"] %>
-                    <%= if has_val?(line), do:  from_iolist [:red, @line] %>
-                    <%= if has_val?(module) || has_val?(line), do: from_iolist [:reset, "\n"] %>
-                    <%= if has_val?(text), do: from_iolist [:yellow, @text, :reset, ": "] %>
-                  """"
+template: """
+<% import IO.ANSI %>
+<%= if has_val?(file), do: from_iolist [:blue,  @file, :reset, "\n"] %>
+<%= if has_val?(module), do: from_iolist [:green, @module, ":"] %>
+<%= if has_val?(line), do:  from_iolist [:red, @line] %>
+<%= if has_val?(module) || has_val?(line), do: from_iolist [:reset, "\n"] %>
+<%= if has_val?(text), do: from_iolist [:yellow, @text, :reset, ": "] %>
+""""
 ```
 
 ## Inspect Colors
@@ -150,21 +150,21 @@ in your config
 
 ```elixir
 config :clouseau,
-        syntax_colors: [
-          string: :red,
-          number: :yellow
-        ]
+syntax_colors: [
+string: :red,
+number: :yellow
+]
 
 ```
 
 The above snipet will replace the default colors for strings and numbers.
 
-Or directly in you function call
+Or directly in you macro call
 
 ```elixir
 %{
-  "doors" => 2,
-  "windows" => 5,
+"doors" => 2,
+"windows" => 5,
 } 
 |> Cl.inspect(label: "-bc Test with border and colors", syntax_colors: [number: :red])
 ```
