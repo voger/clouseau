@@ -5,7 +5,7 @@ defmodule CL.Mixfile do
     "GitHub" => "https://github.com/voger/clouseau"
   }
 
-  @version "0.3.1"
+  @version "0.4.0"
 
   def project do
     [
@@ -31,8 +31,7 @@ defmodule CL.Mixfile do
   defp deps do
     [
       {:credo, "~> 1.0", runtime: false, optional: true},
-      {:ex_doc, "~> 0.19", only: :dev},
-      {:earmark, "~> 1.3", only: :dev},
+      {:ex_doc, "~> 0.19", runtime: false, only: :dev}
     ]
   end
 
@@ -42,7 +41,7 @@ defmodule CL.Mixfile do
 
   defp package() do
     [
-      files: ["lib/**/*.ex", "mix.exs", "README.md", "LICENSE*"],
+      files: ["lib/**/*.ex", "mix.exs", "README.md", "LICENSE*", "CHANGELOG.md"],
       maintainers: ["voger"],
       licenses: ["MIT"],
       links: @links
@@ -52,6 +51,7 @@ defmodule CL.Mixfile do
   defp docs() do
     [
       extras: ["README.md"],
+      main: "readme"
     ]
   end
 end

@@ -4,6 +4,7 @@ It adds the functionality to display the file, module and line number of the cal
 Also it can optionaly display a line under the inspected term, to separate it from other output
 on the screen and optionaly colorize the output. 
 
+
 # How to install
 
 Add `clouseau` to your list of dependencies in `mix.exs`
@@ -12,7 +13,7 @@ Add `clouseau` to your list of dependencies in `mix.exs`
 def deps do
 [
 #...
-{:clouseau, "~> 0.3.1"}
+{:clouseau, "~> 0.4.0"}
 ]
 end
 ```
@@ -21,7 +22,7 @@ end
 
 # How to use
 
-In order to use Clauseau you first must require the `Cl` module
+In order to use Clouseau you first must require the `Cl` module
 
 ```elixir
 require Cl
@@ -95,15 +96,15 @@ white space, keep this behavior in mind.
 ### The available switches are:
 
 
-Switch    | Type     | Default | Shortcut | Description
-----------|----------|---------|----------|----------------------------------------------------------------------------------------------------|
-file:     | :boolean | true    | f        | Display the file where this call happened
-full_path | :boolean | false   | none     | Display the file as absolute path or relative to project root. Default is relative to project root
-module:   | :boolean | true    | m        | Display the module where this call happened
-line:     | :boolean | true    | l        | Display the line where this call happened
-text:     | :boolean | true    | t        | Display the descriptive text for the label
-border:   | :boolean | false   | b        | Display a border under the inspected term
-colors:   | :boolean | false   | c        | Colorize the inspected term
+| Switch    | Type     | Default | Shortcut | Description                                                                                        |
+|-----------|----------|---------|----------|----------------------------------------------------------------------------------------------------|
+| file:     | :boolean | true    | f        | Display the file where this call happened                                                          |
+| full_path | :boolean | false   | none     | Display the file as absolute path or relative to project root. Default is relative to project root |
+| module:   | :boolean | true    | m        | Display the module where this call happened                                                        |
+| line:     | :boolean | true    | l        | Display the line where this call happened                                                          |
+| text:     | :boolean | true    | t        | Display the descriptive text for the label                                                         |
+| border:   | :boolean | false   | b        | Display a border under the inspected term                                                          |
+| colors:   | :boolean | false   | c        | Colorize the inspected term                                                                        |
 
 If you wish to have your default set of switches you can set options in your config
 
