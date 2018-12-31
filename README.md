@@ -11,10 +11,10 @@ Add `clouseau` to your list of dependencies in `mix.exs`
 
 ```elixir
 def deps do
-[
-#...
-{:clouseau, "~> 0.4.0"}
-]
+  [
+    #...
+    {:clouseau, "~> 0.4.0"}
+  ]
 end
 ```
 
