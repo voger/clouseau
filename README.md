@@ -35,6 +35,22 @@ Clouseau exports two macros: `Cl.inspect/2` and `Cl.inspect/3`. Just use them in
 Cl.inspect("test", label: "This is a test")
 ```
 
+or if you want colors and a bottom border
+
+```elixir
+Cl.inspect("test", label: "-cb This is a test")
+```
+
+Of course the `Cl.inspect/2` macro can be used in a pipe
+
+```elixir
+conn
+  |> Cl.inspect(label: "-cb Before magic")
+  |> do_some_magic()
+  |> Cl.inspect(label: "-cb After magic")
+```
+
+
 That's it. You can return to your code now.
 
 
@@ -43,11 +59,9 @@ If you wish to do some customization continue reading below.
 
 ## Switches
 
-Both macros are ready to use out of the box. By default they display the file, module and line where the
-macro was called, above the label and the inspected term.
+Both macros are ready to use out of the box. By default they display the file, module and line where the macro was called, above the label and the inspected term.
 
-clouseau uses [OptionParser](https://hexdocs.pm/elixir/OptionParser.html) to parse the switches. The switches can
-be given directly in the label option. You can use switches to modify what will be shown.
+clouseau uses [OptionParser](https://hexdocs.pm/elixir/OptionParser.html) to parse the switches. The switches can be given directly in the label option. You can use switches to modify what will be shown.
 
 
 ```elixir
@@ -57,7 +71,7 @@ Cl.inspect({"test", 7, %{banana: :yellow}}, label: "--no-file Test showing only 
 ```
 
 ```elixir
-Cl.inspect({"test", 7}, label: "-b Test With border", syntax_colors: [number: :blue])
+Cl.inspect({"test", 7, %{banana: :yellow}}, label: "-b Test With border", syntax_colors: [number: :blue])
 # lib/cltest.ex
 # Clouseau.ClTest:26
 # Test With border: {"test", 7}
@@ -66,10 +80,10 @@ Cl.inspect({"test", 7}, label: "-b Test With border", syntax_colors: [number: :b
 ```
 
 
-Switches that are intended to be used must be grouped in the beginning of the string. Any non-switch group of characters stops the parser and the rest of the line is treated as the text of the label. For example:
+Switches must be grouped in the beginning of the string. Any non-switch group of characters stops the parser and the rest of the line is treated as the text of the label. For example:
 
 ```elixir
-Cl.inspect({"test", 7, [banana: "split"]}, label: "--no-module --no-line -b Showing only the --file option. The --no-border option has no effect")
+Cl.inspect({"test", 7, [banana: :yellow]}, label: "--no-module --no-line -b Showing only the --file option. The --no-border option has no effect")
 # lib/cltest.ex
 # Showing only the --file option. The --no-border option has no effect: {"test", 7, [banana: "split"]}
 # --------------------------------------------------------------------------------------------------------------------------------------------------
@@ -110,7 +124,7 @@ If you wish to have your default set of switches you can set options in your con
 
 ```elixir
 config :clouseau,
-default_switches: [module: true, line: true, file: true, border: true]
+default_switches: [module: true, line: true, file: true, border: true, colors: true]
 ```
 
 
@@ -120,15 +134,13 @@ default_switches: [module: true, line: true, file: true, border: true]
 clouseau uses an [EEx](https://hexdocs.pm/eex/EEx.html) template to display the various parts of the label.
 The template uses a custom engine `Clouseau.TemplateEngine` instead of the default `EEx.SmartEngine`. The differences are:
 
-* It doesn't add a line break on tag's end. Instead you shoud add a `"\n" `where you want a line break. The reason
-    for this change is beacuse this way the line break can be controlled with conditionals.
+* It doesn't add a line break on tag's end. Instead you shoud add a `"\n" `where you want a line break. The reason for this change is beacuse this way the line break can be controlled with conditionals.
 * It supports a `has_val?/1` function that returns `false` if the value is one of `nil`, `false` or `""`.
 * The `@` function desn't use `Access.fetch/2` but `Map.get/2` to get the value. It does not warn or rise any errors. Instead it returns an empty string.
 * It can use IO Lists.
 
 
-The format of the label is not configurable on the fly. If, for example, it is prefered to display
-the module before the line, this can be changed only by using a diferent template at compile time.
+The format of the label is not configurable on the fly. If, for example, it is prefered to display the module before the line, this can be changed only by using a diferent template at compile time.
 
 You can use a custom template by setting in your config. Below is shown the default template as an example.
 
@@ -141,19 +153,18 @@ template: """
 <%= if has_val?(line), do:  from_iolist [:red, @line] %>
 <%= if has_val?(module) || has_val?(line), do: from_iolist [:reset, "\n"] %>
 <%= if has_val?(text), do: from_iolist [:yellow, @text, :reset, ": "] %>
-""""
+"""
 ```
 
 ## Inspect Colors
 
-The colors for the inspected term are choosen to match those of iex. If you wish to change any of the default colors you can do so
-in your config
+The colors for the inspected term are choosen to match those of iex. If you wish to change any of the default colors you can do so in your config
 
 ```elixir
 config :clouseau,
-syntax_colors: [
-string: :red,
-number: :yellow
+  syntax_colors: [
+    string: :red,
+    number: :yellow
 ]
 
 ```
@@ -164,36 +175,44 @@ Or directly in you macro call
 
 ```elixir
 %{
-"doors" => 2,
-"windows" => 5,
+  "doors" => 2,
+  "windows" => 5,
 } 
 |> Cl.inspect(label: "-bc Test with border and colors", syntax_colors: [number: :red])
 ```
 
-If you omit the `-c` switch or have not defined `colors: true` in your config, then the default colors or the user defined colors will not be 
-used. The colors defined in the call will be used as usual. For example
+If the `syntax_colors` option is used in the macro call, then the default colors or colors used in the `syntax_colors` option in `config.exs` are not used.
 
 ```elixir
-{99, "botles", "of", :beer, ["on", "the", "wall"]}
+%{
+  :answer => 42,
+  :comment => "The Answer to the Ultimate Question of Life, The Universe, and Everything."
+
+} 
 |> Cl.inspect(syntax_colors: [number: :red])
 ```
-In the above, only the numbers will be colored.
+
+In the above snippet, only the numbers will be colored.
+
+If colors are defined in `config.exs` they will be merged with the default colors. Any defined color will override the default.
+
+Colors can be displayed either by using the `-c` switch in the call, by defining the `colors: true` in `config.exs` or the `syntax_colors` option in the call.
+
 
 ## Credo
 
-clouseau provides two custom credo checks: `Clouseau.Check.Warning.ClInspect` and `Clouseau.Check.Warning.RequireCl`.
-To use them just append them to the `:checks` option in your `.credo.exs` file.
+clouseau provides two custom credo checks: `Clouseau.Check.Warning.ClInspect` and `Clouseau.Check.Warning.RequireCl`. To use them just append them to the `:checks` option in your `.credo.exs` file.
 
 ```elixir
 checks: [
 
-# ... some checks
+  # ... some checks
 
-# Custom checks can be created using `mix credo.gen.check`.
-#
+  # Custom checks can be created using `mix credo.gen.check`.
+  #
 
-{Clouseau.Check.Warning.ClInspect},
-{Clouseau.Check.Warning.RequireCl},
+  {Clouseau.Check.Warning.ClInspect},
+  {Clouseau.Check.Warning.RequireCl},
 ]
 ```
 
