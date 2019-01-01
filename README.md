@@ -181,7 +181,7 @@ Or directly in you macro call
 |> Cl.inspect(label: "-bc Test with border and colors", syntax_colors: [number: :red])
 ```
 
-If the `syntax_colors` option is used, then the default colors or colors used in the `config.exs` are not used.
+If the `syntax_colors` option is used in the macro call, then the default colors or colors used in the `syntax_colors` option in `config.exs` are not used.
 
 ```elixir
 %{
@@ -201,8 +201,7 @@ Colors can be displayed either by using the `-c` switch in the call, by defining
 
 ## Credo
 
-clouseau provides two custom credo checks: `Clouseau.Check.Warning.ClInspect` and `Clouseau.Check.Warning.RequireCl`.
-To use them just append them to the `:checks` option in your `.credo.exs` file.
+clouseau provides two custom credo checks: `Clouseau.Check.Warning.ClInspect` and `Clouseau.Check.Warning.RequireCl`. To use them just append them to the `:checks` option in your `.credo.exs` file.
 
 ```elixir
 checks: [
