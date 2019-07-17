@@ -38,31 +38,6 @@ defmodule Clouseau.TemplateEngine do
     end
   end
 
-  def handle_expr(buffer, "=", expr) do
-    expr = Macro.prewalk(expr, &handle_assign/1)
-
-    quote do
-      tmp1 = unquote(buffer)
-      # When running in iex values like `module` remain nil because 
-      # they are not applicable. Discard `nil` values
-      if unquote(expr) do
-        [tmp1 | unquote(expr)]
-      else
-        tmp1
-      end
-    end
-  end
-
-  def handle_expr(buffer, "", expr) do
-    expr = Macro.prewalk(expr, &handle_assign/1)
-
-    quote do
-      tmp1 = unquote(buffer)
-      unquote(expr)
-      tmp1
-    end
-  end
-
   def handle_expr(buffer, marker, expr) do
     expr = Macro.prewalk(expr, &handle_assign/1)
     super(buffer, marker, expr)
