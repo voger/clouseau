@@ -13,7 +13,7 @@ Add `clouseau` to your list of dependencies in `mix.exs`
 def deps do
   [
     #...
-    {:clouseau, "~> 0.4.0"}
+    {:clouseau, "~> 0.5.0"}
   ]
 end
 ```
